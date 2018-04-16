@@ -1,0 +1,584 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Lego Batman Adventure</title>
+<link href="https://fonts.googleapis.com/css?family=Aclonica|Ceviche+One" rel="stylesheet">
+
+<style>
+*
+{
+  padding: 0px;
+  margin: 0px;  
+  font-family: 'Aclonica', sans-serif;    
+}
+    
+#introduction
+{
+  margin: 0px auto;
+  padding-top: 20px;
+  width: 1050px;
+  height: 660px;
+  background-image: url(../images/introBackground.jpg);
+  background-size: 1050px 660px;
+  background-repeat: no-repeat;    
+  color: goldenrod;
+  font-size: 20px;
+}
+
+#introStart
+{
+  margin-top: 0px;
+  margin-left: 650px;
+  display: inline-block;
+}
+        
+#stage 
+{
+  position: relative;
+  width: 512px;
+  height: 512px;
+  margin: 10px;
+  background-image: url("../images/background5.png");
+}
+
+.cell
+{
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+}
+
+#game
+{
+  margin-left: 30px;
+  width: 530px;
+  height: 800px;
+  background-color: lightblue;
+  border: 1px dashed black;
+  display: none;
+}
+
+h1
+{
+  text-align: center;
+  font-size: 50px;
+}
+
+p
+{
+  font-size: 20px;
+  width: 512px;
+  padding: 10px;
+}
+
+.bat
+{
+  position: absolute;        
+  margin-top: 200px;
+}
+
+.introText
+{
+  display: inline-block;
+  font-size: 15px;
+}
+
+#clickText
+{
+    position: relative;
+    left: 92%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+</style>
+
+<!--The is the start page that shows before the game, then hides when the icon is clicked to start the game.-->
+<div id="introduction">
+    <audio id = "introSong" autoplay>
+        <source src="../audio/IntroMusic.ogg" type="audio/ogg">
+    </audio>
+    <img id="introStart" src="../images/StartPage.png" height="320" width="320"><br>
+    <p id="clickText">Click icon to start</p>
+    <img src="../images/batcave.png" height="50" width="50"> <p id = topRow class="introText">Use the arrow keys to navigate Lego Batman safely to the batcave.</p><br>
+    <img src="../images/twoFace.JPG" height="50" width="50">
+    <p class="introText">Two-Face might steal your Batman gadgets, or you could get all of his!</p><br>
+    <img src="../images/wayneEnterprise.jpg" height="50" width="50">
+    <p class="introText">Stop by Wayne Enterprises to get more energy by trading in gadgets.</p><br>
+    <img src="../images/joker.JPG" height="50" width="50">
+    <p class="introText">Watch out for Joker - he could be anywhere!</p><br>
+</div>
+
+<!--This is the game page the shows and hides the intro page.-->
+<section id="game">
+  <h1>Lego Batman Adventure</h1>
+  <div id="stage"></div>
+  <p id="output"></p> 
+    <img id="bat1" class="bat" src="../images/bat2.png" width="150" height="auto">
+    <img id="bat2" class="bat" src="../images/bat3.png" width="150" height="auto">
+    <img id="bat3" class="bat" src="../images/bat4.png" width="150" height="auto">
+    <img id="bat4" class="bat" src="../images/bat5.png" width="150" height="auto">
+    <img id="bat5" class="bat" src="../images/bat2.png" width="150" height="auto">
+    <img id="bat6" class="bat" src="../images/bat3.png" width="150" height="auto">
+    <img id="bat7" class="bat" src="../images/bat4.png" width="150" height="auto">
+    <img id="bat8" class="bat" src="../images/bat5.png" width="150" height="auto">
+</section>
+
+<!-- greenstock source for animation.-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/easing/EasePack.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+
+<script>
+    
+let game = document.querySelector("#game");
+var bat1 = document.querySelector("#bat1");
+var bat2 = document.querySelector("#bat2");
+var bat3 = document.querySelector("#bat3");
+var bat4 = document.querySelector("#bat4");
+var bat5 = document.querySelector("#bat5");
+var bat6 = document.querySelector("#bat6");
+var bat7 = document.querySelector("#bat7");
+var bat8 = document.querySelector("#bat8");
+    
+// Event listener for when the intro icon is clicked so the game will show.
+let startBtn = document.querySelector("#introStart")
+startBtn.addEventListener("click",showGame,false);
+    
+function showGame() {
+    introduction.style.display = "none";    
+    game.style.display = "block";    
+    
+//    greenstock animation during the game
+    TweenLite.to(bat1, 10, { rotation:360,
+                                left: 600, //this only works bc position is absolute in CSS
+                                ease: Elastic.easeOut.config(1, 0.3),
+                                y: -600,
+                                delay:1.1
+                                });
+    TweenLite.to(bat2, 12, { rotation:190,
+                                left: 775, //this only works bc position is absolute in CSS
+                                ease: Elastic.easeOut.config(1, 0.3),
+                                y: -500,
+                                delay:1.2
+                                });
+    TweenLite.to(bat3, 8, { rotation:360,
+                                left: 750, //this only works bc position is absolute in CSS
+                                ease: Elastic.easeOut.config(1, 0.3),
+                                y: -800,
+                                delay:1.3
+                                });
+    TweenLite.to(bat5, 14, { rotation:300,
+                                left: 600, //this only works bc position is absolute in CSS
+                                ease: Elastic.easeOut.config(1, 0.3),
+                                y: -750,
+                                delay:9.1
+                                });
+    TweenLite.to(bat6, 8, { rotation:360,
+                                left: 775, //this only works bc position is absolute in CSS
+                                ease: Elastic.easeOut.config(1, 0.3),
+                                y: -650,
+                                delay:9.2
+                                });
+    TweenLite.to(bat4, 12, { rotation:230,
+                                left: 870, //this only works bc position is absolute in CSS
+                                ease: Elastic.easeOut.config(1, 0.3),
+                                y: -700,
+                                delay:1.4
+                                });
+    TweenLite.to(bat8, 14, { rotation:230,
+                                left: 870, //this only works bc position is absolute in CSS
+                                ease: Elastic.easeOut.config(1, 0.3),
+                                y: -850,
+                                delay:9.4
+                                });
+    TweenLite.to(bat7, 10, { rotation:480,
+                                left: 650, //this only works bc position is absolute in CSS
+                                ease: Elastic.easeOut.config(1, 0.3),
+                                y: -950,
+                                delay:9.3
+                                });
+}
+
+//Get a reference to the stage and output
+var stage = document.querySelector("#stage");
+var output = document.querySelector("#output");
+
+//Add a keyboard listener
+window.addEventListener("keydown", keydownHandler, false);
+
+//The game map
+const map =
+[
+  [0, 2, 0, 0, 0, 0, 0, 3],
+  [0, 0, 0, 1, 0, 0, 2, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 0, 0, 2, 0, 0, 1, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 2, 0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 1, 0, 0, 0, 0]
+];
+
+//The game objects map
+const gameObjects =
+[
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 5, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [4, 0, 0, 0, 0, 0, 0, 0]
+];
+
+//Map code
+const WATER = 0;
+const WAYNEENT = 1;
+const TWOFACE = 2;
+const BATCAVE = 3;
+const BATMAN = 4;
+const JOKER = 5;
+
+//The size of each cell
+const SIZE = 64;
+
+//The number of rows and columns
+const ROWS = map.length;
+const COLUMNS = map[0].length;
+
+//Batman and the Joker's starting position
+var batmanRow;
+var batmanColumn;
+var jokerRow;
+var jokerColumn;
+
+for(var row = 0; row < ROWS; row++) 
+{	
+  for(var column = 0; column < COLUMNS; column++) 
+  {
+    if(gameObjects[row][column] === BATMAN)
+    { 
+      batmanRow = row;
+      batmanColumn = column;
+    }
+    if(gameObjects[row][column] === JOKER)
+    { 
+      jokerRow = row;
+      jokerColumn = column;
+    }
+  }
+}
+
+//Arrow key codes
+const UP = 38;
+const DOWN = 40;
+const RIGHT = 39;
+const LEFT = 37;
+
+//The game variables
+var energy = 10;
+var gadgets = 10;
+var experience = 0;
+var gameMessage = 'Use the arrow keys to find your way safely to the batcave.';
+
+render();
+
+function keydownHandler(event)
+{ 
+  switch(event.keyCode)
+  {
+    case UP:
+	    if(batmanRow > 0)
+	    {
+	      gameObjects[batmanRow][batmanColumn] = 0;	      
+	      batmanRow--;	      
+	      gameObjects[batmanRow][batmanColumn] = BATMAN;
+	    }
+	    break;
+	  
+	  case DOWN:
+	    if(batmanRow < ROWS - 1)
+	    {
+	      gameObjects[batmanRow][batmanColumn] = 0;
+	      batmanRow++;
+	      gameObjects[batmanRow][batmanColumn] = BATMAN;
+	    }
+	    break;
+	    
+	  case LEFT:
+	    if(batmanColumn > 0)
+	    {
+	      gameObjects[batmanRow][batmanColumn] = 0;
+	      batmanColumn--;
+	      gameObjects[batmanRow][batmanColumn] = BATMAN;
+	    }
+	    break;  
+	    
+	  case RIGHT:
+	    if(batmanColumn < COLUMNS - 1)
+	    {
+	      gameObjects[batmanRow][batmanColumn] = 0;
+	      batmanColumn++;
+	      gameObjects[batmanRow][batmanColumn] = BATMAN;
+	    }
+	    break; 
+  }
+  
+  //Batman's location
+  switch(map[batmanRow][batmanColumn])
+  {
+    case WATER:
+      gameMessage = 'You navigate through Gotham City.';
+      break;
+    
+    case TWOFACE:
+      fight();
+      break; 
+    
+    case WAYNEENT:
+      trade();
+      break; 
+      
+    case BATCAVE:
+      endGame();
+      break;      
+  }
+  
+  //function to move the Joker
+  moveJoker();
+  
+  
+  //End game if Batman runs into the Joker
+  if(gameObjects[batmanRow][batmanColumn] === JOKER)
+  {
+    endGame();
+  }
+    
+  energy--;
+  
+  //Check if Batman runs out of energy or gadgets
+  if(energy <= 0 || gadgets <= 0)
+  {
+    endGame();
+  }
+  
+  //Render the game
+  render();
+}
+ 
+  // function to move the Joker
+function moveJoker()
+{ 
+  const UP = 1;
+  const DOWN = 2;
+  const LEFT = 3;
+  const RIGHT = 4;
+  
+  var validDirections = [];
+
+  var direction = undefined;
+
+  if(jokerRow > 0)
+  {
+    var thingAbove = map[jokerRow - 1][jokerColumn];
+    if(thingAbove === WATER)
+	  {
+	    validDirections.push(UP);
+	  }
+  }
+  if(jokerRow < ROWS - 1)
+  { 
+    var thingBelow = map[jokerRow + 1][jokerColumn];
+    if(thingBelow === WATER)
+	  {
+	    validDirections.push(DOWN);
+	  }
+  }
+  if(jokerColumn > 0)
+  {
+    var thingToTheLeft = map[jokerRow][jokerColumn - 1];
+    if(thingToTheLeft === WATER)
+	  {
+	    validDirections.push(LEFT);
+	  }
+  } 
+  if(jokerColumn < COLUMNS - 1)
+  {
+    var thingToTheRight = map[jokerRow][jokerColumn + 1];
+    if(thingToTheRight === WATER)
+	  {
+	    validDirections.push(RIGHT);
+	  }
+  } 
+
+  if(validDirections.length !== 0)
+  {
+    var randomNumber = Math.floor(Math.random() * validDirections.length);
+    direction = validDirections[randomNumber];
+  }
+
+  switch(direction)
+  {
+    case UP:      
+		  gameObjects[jokerRow][jokerColumn] = 0;		  
+		  jokerRow--; 
+		  gameObjects[jokerRow][jokerColumn] = JOKER;
+		  break;
+	  
+	  case DOWN:
+	    gameObjects[jokerRow][jokerColumn] = 0;
+		  jokerRow++;
+		  gameObjects[jokerRow][jokerColumn] = JOKER;
+	    break;
+	  
+	  case LEFT:
+	    gameObjects[jokerRow][jokerColumn] = 0;
+		  jokerColumn--;
+		  gameObjects[jokerRow][jokerColumn] = JOKER;
+	    break;
+	 
+	 case RIGHT:
+	    gameObjects[jokerRow][jokerColumn] = 0;
+		  jokerColumn++;
+		  gameObjects[jokerRow][jokerColumn] = JOKER;
+  }
+}
+
+// function when Batman reaches Wayne Enterprises - to try an get energy.
+function trade()
+{
+  var batmanEnergy = experience + gadgets;
+  var cost = Math.ceil(Math.random() * batmanEnergy);
+  
+  if(gadgets > cost)
+  {
+    energy += batmanEnergy;
+    gadgets -= cost;
+    experience += 2;    
+    gameMessage =  `You build ${batmanEnergy} energy points for sharing ${cost} Batman gadgets with Wayne Enterprises.`;
+  }
+  else
+  {
+    experience += 1;
+    gameMessage = "You don't have enough Batman gadgets to build your energy."
+  }
+}
+
+// function for when Batman meets Two-Face and fights him for his gadgets.
+function fight()
+{  
+  var batmanStrength = Math.ceil((energy + gadgets) / 2);
+  var twofaceStrength = Math.ceil(Math.random() * batmanStrength * 2);
+  
+  if(twofaceStrength > batmanStrength)
+  {
+    var stolenGadgets = Math.round(twofaceStrength / 2);
+    gadgets -= stolenGadgets;    
+    experience += 1;
+    gameMessage = `You fight and LOSE ${stolenGadgets} Batman gadgets.<br>Batman's strength: ${batmanStrength}. Two-Face's strength: ${twofaceStrength}.`;
+  }
+  else
+  {
+    var twofaceGadgets = Math.round(twofaceStrength / 2);
+    gadgets += twofaceGadgets;
+    experience += 2;
+    gameMessage = `You fight and WIN ${twofaceGadgets} Batman gadgets.<br>Batman's strength: ${batmanStrength}. Two-Face's strength: ${twofaceStrength}.`;
+  } 
+}
+    
+// function to end the game if Batman either makes is to the batcave or is defeated.
+function endGame()
+{    
+  if(map[batmanRow][batmanColumn] === BATCAVE)
+  {
+    var score = energy + gadgets + experience;
+    gameMessage 
+      = `You made it to the batcave ALIVE! <br>Final Score: ${score}`;
+  }
+  else if(gameObjects[batmanRow][batmanColumn] === JOKER)
+  {
+    gameMessage 
+      = "Batman has been defeated by the Joker!";    
+  }
+  else
+  {
+    if(gadgets <= 0)
+    {
+      gameMessage += " You've run out of Batman gadgets!"; 
+    }
+    else
+    {
+      gameMessage += " You've run out of energy!"; 
+    }    
+    gameMessage 
+      += " You'll have to wait for Robin to save you!"; 
+  }
+    window.removeEventListener("keydown", keydownHandler, false);  
+}
+
+function render()
+{
+  //Clear the stage from the previous turn.  
+  if(stage.hasChildNodes())
+  {
+    for(var i = 0; i < ROWS * COLUMNS; i++) 
+    {	 
+      stage.removeChild(stage.firstChild);
+    }
+  }
+  
+  //Render the game by looping through the map arrays
+  for(var row = 0; row < ROWS; row++) 
+  {	
+    for(var column = 0; column < COLUMNS; column++) 
+    { 
+      var cell = document.createElement("img");
+      cell.setAttribute("class", "cell");
+      stage.appendChild(cell);
+        
+      switch(map[row][column])
+      {
+        case WATER:
+          cell.src = "../images/water.png";
+          break;
+
+        case WAYNEENT:
+          cell.src = "../images/wayneEnterprise.jpg";
+          break; 
+
+        case TWOFACE:
+          cell.src = "../images/twoFace.jpg";
+          break; 
+
+        case BATCAVE:
+          cell.src = "../images/batcave.png";
+          break;   
+      }  
+      
+	    switch(gameObjects[row][column])
+	    {
+	      case BATMAN:
+	        cell.src = "../images/batman.png";
+	        break;   
+	        
+	      case JOKER:
+	        cell.src = "../images/joker.jpg";
+	        break;  
+	    }   
+      cell.style.top = row * SIZE + "px";
+      cell.style.left = column * SIZE + "px";
+    }
+  }  
+	output.innerHTML = gameMessage;
+	output.innerHTML 
+	  +=`<br>Batman gadgets: ${gadgets}, Energy: ${energy}, Experience: ${experience}`;
+}
+</script>
+
+
+
+
+
+
+
